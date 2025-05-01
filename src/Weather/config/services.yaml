@@ -12,6 +12,10 @@ services:
     resource: '../Ports/Http/Api/Controllers/'
     tags: [ 'controller.service_arguments' ]
 
+  App\Weather\Ports\Http\Ui\Controllers\:
+    resource: '../Ports/Http/Ui/Controllers/'
+    tags: [ 'controller.service_arguments' ]
+
   app.weather.api.client:
     class: Symfony\Contracts\HttpClient\HttpClientInterface
     factory: [ '@http_client', 'withOptions' ]

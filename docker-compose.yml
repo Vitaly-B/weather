@@ -17,7 +17,14 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-    command: sh -c "composer install -n && chmod -R 0777 ./var && php-fpm"
+    command: >
+      sh -c "
+        composer install -n &&
+        chmod -R 0777 ./var &&
+        yarn install &&
+        yarn watch &
+        php-fpm
+      "
     environment:
       PHP_XDEBUG_MODE: debug
       PHP_XDEBUG_START_WITH_REQUEST: trigger

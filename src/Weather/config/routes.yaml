@@ -4,3 +4,10 @@ api:
       path: ../Ports/Http/Api/Controllers
       namespace: App\Weather\Ports\Http\Api\Controllers
   type: attribute
+
+ui:
+  prefix: '/'
+  resource:
+    path: ../Ports/Http/Ui/Controllers
+    namespace: App\Weather\Ports\Http\Ui\Controllers
+  type: attribute

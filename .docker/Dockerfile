@@ -29,5 +29,9 @@ RUN apk --no-cache --update add autoconf gcc g++ make pkgconfig musl-dev linux-h
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
+# Установка Node.js и Yarn
+RUN apk add --no-cache nodejs npm \
+    && npm install -g yarn
+
 EXPOSE 9000
 CMD ["php-fpm"]
