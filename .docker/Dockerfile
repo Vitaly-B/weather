@@ -1,15 +1,11 @@
 FROM php:8.3.8-fpm-alpine as base
 
 RUN apk --no-cache add \
-    imagemagick \
-    imagemagick-dev \
     libtool \
     autoconf \
     gcc \
     g++ \
     make \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
     && apk del libtool autoconf gcc g++ make
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

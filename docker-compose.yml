@@ -17,7 +17,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-#    command: sh -c "composer install -n && chmod -R 0777 ./var && php-fpm"
+    command: sh -c "composer install -n && chmod -R 0777 ./var && php-fpm"
     environment:
       PHP_XDEBUG_MODE: debug
       PHP_XDEBUG_START_WITH_REQUEST: trigger
@@ -33,7 +33,7 @@ services:
       - ./.docker/dev/etc/nginx/conf.d/all.conf:/etc/nginx/conf.d/all.conf
       - ./:/var/www
     ports:
-      - "8000:80"
+      - "80:80"
 
 networks:
   belikov_example_weather:
