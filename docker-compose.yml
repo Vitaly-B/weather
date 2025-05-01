@@ -1,0 +1,40 @@
+name: belikov-example-weather
+
+services:
+  php:
+    build:
+      context: ./.docker
+      target: dev
+      args:
+        env: "dev"
+    restart: unless-stopped
+    tty: true
+    networks:
+      - belikov_example_weather
+    expose:
+      - 9000
+      - 9003
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+#    command: sh -c "composer install -n && chmod -R 0777 ./var && php-fpm"
+    environment:
+      PHP_XDEBUG_MODE: debug
+      PHP_XDEBUG_START_WITH_REQUEST: trigger
+
+  webserver:
+    image: nginx:stable
+    restart: unless-stopped
+    tty: true
+    networks:
+      - belikov_example_weather
+    working_dir: /var/www
+    volumes:
+      - ./.docker/dev/etc/nginx/conf.d/all.conf:/etc/nginx/conf.d/all.conf
+      - ./:/var/www
+    ports:
+      - "8000:80"
+
+networks:
+  belikov_example_weather:
+    driver: bridge
