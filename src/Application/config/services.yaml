@@ -1,0 +1,20 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Application\:
+    resource: '../'
+    exclude:
+      - '../config/'
+
+  App\Application\Ports\Http\Controllers\:
+    resource: '../Ports/Http/Controllers/'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Application\Ports\Http\Controllers\ErrorAction:
+    arguments:
+      $kernel: '@kernel'
+      $controller: '%kernel.error_controller%'
+      $errorRenderer: '@error_renderer'
+    tags: [ 'controller.service_arguments' ]

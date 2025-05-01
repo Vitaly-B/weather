@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: Weather
+  description: Weather API
+  version: 1.0.0
+servers:
+  - url: http://localhost
+  - url: https://127.0.0.1
+paths:
+  /api/weather/current:
+    get:
+      summary: Get current weather
+      tags:
+        - Weather
+      parameters:
+        - $ref: '#/components/parameters/CityName'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/WeatherInfo'
+        '400':
+          description: Bad request. Got errors while validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugError'
+
+components:
+  parameters:
+    CityName:
+      name: city
+      in: query
+      description: City name
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    WeatherInfo:
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        temperature:
+          type: number
+          format: float
+        condition:
+          type: string
+        humidity:
+          type: integer
+        wind_speed:
+          type: integer
+        last_updated:
+          $ref: '#/components/schemas/DateTime'
+
+    DateTime:
+      properties:
+        date:
+          type: string
+          format: date-time
+        timezone_type:
+          type: integer
+        timezone:
+          type: string
+
+    DebugError:
+      properties:
+        code:
+          type: integer
+          description: Response code
+        message:
+          type: string
+          description: Error message
+        errors:
+          type: array
+          description: Array of validation errors grouped by fields
+        file:
+          type: string
+        line:
+          type: integer
+        trace:
+          type: array

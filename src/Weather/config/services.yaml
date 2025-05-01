@@ -1,0 +1,27 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Weather\:
+    resource: '../'
+    exclude:
+      - '../config/'
+
+  App\Weather\Ports\Http\Api\Controllers\:
+    resource: '../Ports/Http/Api/Controllers/'
+    tags: [ 'controller.service_arguments' ]
+
+  app.weather.api.client:
+    class: Symfony\Contracts\HttpClient\HttpClientInterface
+    factory: [ '@http_client', 'withOptions' ]
+    arguments:
+      -
+        base_uri: '%env(WEATHER_API_BASE_URL)%'
+        query:
+          key: '%env(WEATHER_API_KEY)%'
+
+  App\Weather\Infrastructure\Clients\Weather\ClientInterface:
+    class: App\Weather\Infrastructure\Clients\Weather\Client
+    arguments:
+      $httpClient: '@app.weather.api.client'

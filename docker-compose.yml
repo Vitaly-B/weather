@@ -21,6 +21,8 @@ services:
     environment:
       PHP_XDEBUG_MODE: debug
       PHP_XDEBUG_START_WITH_REQUEST: trigger
+      WEATHER_API_BASE_URL: https://api.weatherapi.com/v1/
+      WEATHER_API_KEY: 5043486a7fa7478f8fe111847250105
 
   webserver:
     image: nginx:stable

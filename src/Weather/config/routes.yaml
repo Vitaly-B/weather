@@ -1,0 +1,6 @@
+api:
+  prefix: '/api/weather'
+  resource:
+      path: ../Ports/Http/Api/Controllers
+      namespace: App\Weather\Ports\Http\Api\Controllers
+  type: attribute
