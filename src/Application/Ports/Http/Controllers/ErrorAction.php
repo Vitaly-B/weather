@@ -63,7 +63,6 @@ final class ErrorAction extends ErrorController
 
         \ksort($content);
 
-
         if ($exception instanceof InvalidArgumentException) {
             $statusCode = Response::HTTP_BAD_REQUEST;
         }
