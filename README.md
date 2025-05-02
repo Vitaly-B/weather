@@ -50,6 +50,8 @@ docker-compose up -d --build
 
 [http://localhost](http://localhost)
 
+[http://127.0.0.1](http://127.0.0.1)
+
 <h5>API GET /api/weather/current</h5>
 
 curl --location 'http://localhost/api/weather/current?city=Kyiv' \

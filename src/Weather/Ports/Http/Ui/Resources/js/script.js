@@ -49,7 +49,16 @@ $(document).ready(function () {
                     );
                 },
                 error: function (xhr) {
-                    alert('Error: ' + xhr.responseText);
+                    $('#weather-info').html("");
+
+                    const contentType = xhr.getResponseHeader('Content-Type');
+
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = JSON.parse(xhr.responseText);
+                        $('#weather-info').html('<div class="alert alert-danger">' + data.message + '</div>');
+                    } else {
+                        $('#weather-info').html('<div class="alert alert-danger">' + xhr.responseText + '</div>');
+                    }
                 }
             });
         }
